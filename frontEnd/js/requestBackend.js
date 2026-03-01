@@ -15,17 +15,31 @@ async function requestBackend(location, animal, timeframe) {
     return await response.json();
 }
 
-// Trigger "Changes you made may not be saved" prompt to prevent lots of refreshing
-window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-    event.returnValue = ''; 
-});
+async function displayAnalysis(location, animal, timeframe) {
+    try {
+        const data = await requestBackend(location, animal, timeframe);
+        console.log(data);
+    }
+    catch (error) {
+        console.log("Error fetching AI response:", error);
+    }
+}
+
+// // Trigger "Changes you made may not be saved" prompt to prevent lots of refreshing
+// window.addEventListener('beforeunload', (event) => {
+//     event.preventDefault();
+//     event.returnValue = ''; 
+// });
+// ^ ADD BACK IN PRODUCTION ^
 
 // Requesting
 const urlData = new URLSearchParams(window.location.search);
 
-if (!urlData.has('location') && !urlData.has('animal') && !urlData.has('timeframe')) {
+if (!urlData.has('location') || !urlData.has('animal') || !urlData.has('timeframe')) {
     window.location.href = 'index.html'; // Redirect back to main page
 }
-const data = requestBackend(urlData.get('location'), urlData.get('animal'), urlData.get('timeframe'))
-console.log(data)
+displayAnalysis(
+    urlData.get('location'), 
+    urlData.get('animal'), 
+    urlData.get('timeframe')
+)
