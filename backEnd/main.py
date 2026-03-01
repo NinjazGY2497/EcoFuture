@@ -1,23 +1,29 @@
-from google import genai
-from pydantic import BaseModel
+from groq import Groq
+from pydantic import BaseModel, ConfigDict
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from typing import Literal, List
+import json
 
 load_dotenv()
 
 class PopulationResponse(BaseModel):
-    labels: list[str]
-    values: list[int]
-    extinction_level: str
+    model_config = ConfigDict(extra='forbid')
+    labels: List[str]
+    values: List[int]
+    extinction_level: Literal[
+        'Not Evaluated', 'Safe', 'Near Threatened', 
+        'Vulnerable', 'Endangered', 'Critically Endangered', 'Extinct'
+    ]
 
-# Gemini API
+# Groq API
 try:
     apiKey = os.getenv("API_KEY")
-    client = genai.Client(api_key=apiKey)
+    client = Groq(api_key=apiKey)
 except Exception:
-    print(f"**main.py** - ERROR - Failed to initialize Gemini API client.")
+    print(f"**main.py** - ERROR - Failed to initialize Groq API client.")
     raise
 
 # CORS allowed origins
@@ -28,32 +34,48 @@ app = Flask(__name__)
 # Whitelist sites specified
 CORS(app, resources={r"/ai-response": {"origins": ALLOWED_ORIGINS}})
 
-def requestGemini(location, animal, timeframe, whatIf):
+def requestGroq(location, animal, timeframe, whatIf):
     try:
+        systemPrompt = (
+            "You are an expert conservation biologist and data scientist. "
+            "Your task is to provide detailed population projections based on environmental scenarios. "
+            "You must respond ONLY in a valid JSON format. "
+            "For the 'extinction_level' field, you must choose exactly one of these strings: "
+            "'Not Evaluated' (ONLY if the inputs are INVALID), 'Safe', 'Near Threatened', 'Vulnerable', 'Endangered', "
+            "'Critically Endangered', 'Extinct'."
+        )
+
         whatIfPrompt = f"Consider the following what-if scenario: {whatIf}\n" if whatIf else ""
 
-        prompt = (
+        userPrompt = (
+            f"{whatIfPrompt}"
             f"Predict the population of {animal} in {location} over {timeframe}. "
-            f"Provide the historical/projected population data for the graph. "
-            f"Also, determine the predicted extinction level for this animal in this specific region. "
-            f"Extinction level must be one of: 'Not Evaluated', 'Safe', 'Near Threatened', "
-            f"'Vulnerable', 'Endangered', 'Critically Endangered', 'Extinct'."
+            f"Provide the historical/projected population data (detailed) for a graph (detailedd) with 'labels' (time) and 'values' (population count)."
         )
         
-        response = client.models.generate_content(
-            model="gemini-3-flash-preview",
-            contents=whatIfPrompt + prompt,
-            config={
-                "response_mime_type": "application/json",
-                "response_schema": PopulationResponse,
+        chatCompletion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": systemPrompt},
+                {"role": "user", "content": userPrompt}
+            ],
+            
+            model="meta-llama/llama-4-scout-17b-16e-instruct", 
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "PopulationResponse",
+                    "strict": True,
+                    "schema": PopulationResponse.model_json_schema()
+                }
             }
         )
 
-        responseDict = response.parsed.model_dump()
-        print(f"**main.py** - INFO - AI Response: {responseDict}")
-        return responseDict
+        response = json.loads(chatCompletion.choices[0].message.content)
+
+        print(f"**main.py** - INFO - AI Response: {response}")
+        return response
     except Exception as e:
-        print(f"**main.py** - ERROR - Failed to get response from Gemini API: {e}")
+        print(f"**main.py** - ERROR - Failed to get response from Groq API: {e}")
         raise
     
 @app.route("/ai-response", methods=["POST"])
@@ -66,7 +88,7 @@ def getAIResponse():
         print(f"**main.py** - ERROR - Failed to parse request JSON: {promptData}")
         raise
 
-    result = requestGemini(location, animal, timeframe, whatIf)
+    result = requestGroq(location, animal, timeframe, whatIf)
     return jsonify({"response": result})
 
 if __name__ == "__main__":
