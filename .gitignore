@@ -6,3 +6,4 @@ backEnd/quickstart.py
 *.json
 backEnd/vertexaitest.py
 backEnd/huggingface.py
+groqTest.py
