@@ -24,11 +24,11 @@
                     <label for="whatIfSelect">What-If Scenarios:</label>
                     <select id="whatIfSelect" class="styled-select">
                         <option value="none">None</option>
-                        <option value="virus">New Virus Appearing</option>
-                        <option value="city_expansion">City Expansion</option>
+                        <option value="newVirus">New Virus Appearing</option>
+                        <option value="cityExpansion">City Expansion</option>
                         <option value="drought">Drought</option>
-                        <option value="pop_change">Sharp Increase/Decrease of Population</option>
-                        <option value="side_effects">Side Effects</option>
+                        <option value="suddenPopulationChange">Sharp Increase/Decrease of Population</option>
+                        <option value="sideEffects">Side Effects</option>
                     </select>
                 </div>
 
@@ -41,10 +41,24 @@
             <div style="width: 800px;">
                 <canvas id="geminiChart"></canvas>
             </div>
+
+            <div id="aiStatusBar" class="ai-status-bar" style="display: none;">
+            <div class="status-content">
+                <div class="status-left">
+                    <span class="spinner"></span>
+                    <span class="status-text">Contacting AI...</span>
+                </div>
+                <button id="btnRetry" class="retry-button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                    Retry
+                </button>
+            </div>
+        </div>
+
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="./js/chart.js"></script> <script src="./js/requestBackend.js"></script>
+            <script src="./js/chart.js" type="module"></script> 
+            <script src="./js/requestBackend.js" type="module"></script>
         </div>
     </div>
-    <script src="./js/requestBackend.js"></script>
 </body>
 </html>
