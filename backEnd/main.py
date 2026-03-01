@@ -24,7 +24,8 @@ CORS(app, resources={r"/ai-response": {"origins": ALLOWED_ORIGINS}})
 
 def requestGemini(location, animal, timeframe):
     try:
-        prompt = f"Predict the population of {animal} in {location} over {timeframe}. Return ONLY a JSON object with this structure: {{'labels': ['year1', 'year2'], 'values': [100, 200]}}. No text or explanations."
+        prompt = (f"Predict the population of {animal} in {location} over {timeframe}. "
+                  f"Return ONLY a JSON object (ex: {{\"labels\": [\"2020\", \"2021\"], \"values\": [100, 110]}}). No text.")
         response = client.models.generate_content(
             model="gemini-3-flash-preview",
             contents=prompt

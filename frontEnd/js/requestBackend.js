@@ -1,16 +1,10 @@
 async function requestBackend(location, animal, timeframe) {
     const BACKEND_URL = "http://127.0.0.1:2497/ai-response";
-
     const response = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            location: location,
-            animal: animal,
-            timeframe: timeframe,
-        })
+        body: JSON.stringify({ location, animal, timeframe })
     });
-
     if (!response.ok) throw new Error("Network response was not ok");
     return await response.json();
 }
@@ -18,10 +12,9 @@ async function requestBackend(location, animal, timeframe) {
 async function displayAnalysis(location, animal, timeframe) {
     try {
         const data = await requestBackend(location, animal, timeframe);
-        console.log(data);
-    }
-    catch (error) {
-        console.log("Error fetching AI response:", error);
+        updateChartWithAI(data.response);
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -34,12 +27,12 @@ async function displayAnalysis(location, animal, timeframe) {
 
 // Requesting
 const urlData = new URLSearchParams(window.location.search);
-
-if (!urlData.has('location') || !urlData.has('animal') || !urlData.has('timeframe')) {
-    window.location.href = 'index.html'; // Redirect back to main page
+if (!urlData.has('location') && !urlData.has('animal') && !urlData.has('timeframe')) {
+    window.location.href = 'index.html';
 }
+
 displayAnalysis(
     urlData.get('location'), 
     urlData.get('animal'), 
     urlData.get('timeframe')
-)
+);

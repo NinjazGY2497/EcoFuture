@@ -148,7 +148,7 @@ input[type="text"]::placeholder {
 
 .prediction-value {
     font-size: 1.5rem;
-    color: #ffeb3b; /* Bright yellow for visibility */
+    color: #ffffff; /* Bright yellow for visibility */
     margin-top: -5px;
     text-transform: none;
 }
