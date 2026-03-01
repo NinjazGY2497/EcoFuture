@@ -47,7 +47,7 @@ let myChart = new Chart(ctx, {
         }
     });
 
-export function updateChartWithAI(aiResponse, animal) {
+export function updateChartWithAI(aiResponse) {
     try {
         const graphData = aiResponse
         myChart.data.labels = graphData.labels;

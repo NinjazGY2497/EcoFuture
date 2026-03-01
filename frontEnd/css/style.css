@@ -14,7 +14,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1100px; /* Wider to accommodate the dashboard */
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -59,10 +59,10 @@ input[type="text"],
     outline: none;
 }
 
-/* --- Placeholder Styling --- */
+/* --- Placeholder Styles --- */
 input[type="text"]::placeholder {
-    color: #1e4d2b; /* Dark green */
-    opacity: 1; /* Ensures solid color across all browsers */
+    color: #1e4d2b;
+    opacity: 1; 
 }
 
 .styled-select option {
@@ -70,7 +70,7 @@ input[type="text"]::placeholder {
     color: white;
 }
 
-/* --- Button Styling --- */
+/* --- Button Styles --- */
 .primary-Button {
     background: #ffffff;
     color: #1e4d2b;
@@ -91,7 +91,7 @@ input[type="text"]::placeholder {
     transform: translateY(-2px);
 }
 
-/* --- Home Page (Index) Layout --- */
+/* --- Index.html Layout --- */
 .main-form {
     max-width: 500px;
     margin: 0 auto;
@@ -118,8 +118,8 @@ input[type="text"]::placeholder {
     flex-shrink: 0;
 }
 
-/* --- Analysis Page (Dashboard) Layout --- */
-.dashboard-body {
+/* --- Analysis.html Layout --- */
+.analysis-body {
     display: flex;
     justify-content: space-between;
     gap: 40px;
@@ -141,14 +141,14 @@ input[type="text"]::placeholder {
 .themed-graph {
     width: 100%;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.95); /* High contrast for the graph */
+    background: rgba(255, 255, 255, 0.95);
     padding: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .prediction-value {
     font-size: 1.5rem;
-    color: #ffffff; /* Bright yellow for visibility */
+    color: #ffffff;
     margin-top: -5px;
     text-transform: none;
 }
@@ -166,7 +166,7 @@ input[type="text"]::placeholder {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #333; /* Dark theme to match EcoFuture */
+    background-color: #333;
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -185,8 +185,8 @@ input[type="text"]::placeholder {
 .status-left {
     display: flex;
     align-items: center;
-    justify-content: center; /* Keeps it centered */
-    gap: 12px;               /* Ensures space between spinner and text */
+    justify-content: center;
+    gap: 12px;
 }
 
 /* Loading Spinner */
@@ -195,12 +195,12 @@ input[type="text"]::placeholder {
     width: 16px;
     height: 16px;
     border: 2px solid #ccc;
-    border-top: 2px solid #00ffcc; /* Eco-green color */
+    border-top: 2px solid #00ffcc;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes spin { /* Used Gemini for this spinner animation */
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }

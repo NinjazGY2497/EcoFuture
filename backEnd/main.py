@@ -12,7 +12,7 @@ load_dotenv()
 class PopulationResponse(BaseModel):
     model_config = ConfigDict(extra='forbid')
     labels: List[str]
-    values: List[int]
+    values: List[float]
     extinction_level: Literal[
         'Not Evaluated', 'Safe', 'Near Threatened', 
         'Vulnerable', 'Endangered', 'Critically Endangered', 'Extinct'
@@ -39,6 +39,7 @@ def requestGroq(location, animal, timeframe, whatIf):
         systemPrompt = (
             "You are an expert conservation biologist and data scientist. "
             "Your task is to provide detailed population projections based on environmental scenarios. "
+            "To keep graphs clean, provide a maximum of 20 data points (labels/values)."
             "You must respond ONLY in a valid JSON format. "
             "For the 'extinction_level' field, you must choose exactly one of these strings: "
             "'Not Evaluated' (ONLY if the inputs are INVALID), 'Safe', 'Near Threatened', 'Vulnerable', 'Endangered', "

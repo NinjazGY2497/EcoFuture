@@ -48,7 +48,7 @@ async function displayAnalysis(location, animal, timeframe, whatIf=null) {
 
 function setExtinctionLevel(level) {
     const colorMap = {
-        "Extinct": "#000000",               // Black
+        "Extinct": "#000000",                // Black
         "Critically Endangered": "#8B0000",  // Dark Red
         "Endangered": "#FF0000",             // Red
         "Vulnerable": "#FFA500",             // Orange
@@ -64,11 +64,10 @@ function setExtinctionLevel(level) {
 }
 
 // // Trigger "Changes you made may not be saved" prompt to prevent lots of refreshing
-// window.addEventListener('beforeunload', (event) => {
-//     event.preventDefault();
-//     event.returnValue = ''; 
-// });
-// ^ ADD BACK IN PRODUCTION ^
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = ''; 
+});
 
 // Requesting
 const urlData = new URLSearchParams(window.location.search);
