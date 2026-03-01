@@ -1,1 +1,8 @@
 References&Learning/
+.env
+aarush-tcnj/
+backEnd/aiTest.py
+backEnd/quickstart.py
+*.json
+backEnd/vertexaitest.py
+backEnd/huggingface.py
