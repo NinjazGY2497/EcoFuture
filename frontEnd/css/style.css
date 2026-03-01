@@ -1,0 +1,161 @@
+/* --- Core Theme --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e4d2b 0%, #4CAF50 50%, #f0f7f4 100%);
+    background-attachment: fixed;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px; /* Wider to accommodate the dashboard */
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: #e0f2f1;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+/* --- Form & Input Elements --- */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+input[type="text"], 
+.styled-select {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: white;
+    backdrop-filter: blur(10px);
+    outline: none;
+}
+
+/* --- Placeholder Styling --- */
+input[type="text"]::placeholder {
+    color: #1e4d2b; /* Dark green */
+    opacity: 1; /* Ensures solid color across all browsers */
+}
+
+.styled-select option {
+    background-color: #1e4d2b;
+    color: white;
+}
+
+/* --- Button Styling --- */
+.primary-Button {
+    background: #ffffff;
+    color: #1e4d2b;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.primary-Button:hover {
+    background: #e0f2f1;
+    transform: translateY(-2px);
+}
+
+/* --- Home Page (Index) Layout --- */
+.main-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+}
+
+.input-with-button {
+    display: flex;
+    gap: 10px;
+}
+
+.detect-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 0 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* --- Analysis Page (Dashboard) Layout --- */
+.dashboard-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.metrics-column {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.graph-column {
+    flex: 1.5;
+}
+
+.themed-graph {
+    width: 100%;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95); /* High contrast for the graph */
+    padding: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.prediction-value {
+    font-size: 1.5rem;
+    color: #ffeb3b; /* Bright yellow for visibility */
+    margin-top: -5px;
+    text-transform: none;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
