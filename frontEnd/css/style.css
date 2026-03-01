@@ -159,3 +159,68 @@ input[type="text"]::placeholder {
     gap: 15px;
     margin-top: 20px;
 }
+
+/* For Contacting AI Bar */
+.ai-status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Dark theme to match EcoFuture */
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-family: sans-serif;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+}
+
+.status-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Keeps it centered */
+    gap: 12px;               /* Ensures space between spinner and text */
+}
+
+/* Loading Spinner */
+.spinner {
+    flex-shrink: 0; 
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top: 2px solid #00ffcc; /* Eco-green color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Retry Button */
+.retry-button {
+    background: transparent;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+    background: #00ffcc;
+    color: #1a1a1a;
+}
