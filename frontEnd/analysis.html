@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Analysis</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>EcoFuture</h1>
+            <h2>A Predictive Examination of Your Ecosystem</h2>
+        </header>
+
+        <div class="dashboard-body">
+            <div class="metrics-column">
+                <div class="form">
+                    <label>Used:</label>
+                </div>
+                
+                <div class="form">
+                    <label>Extinction Level Prediction:</label>
+                    <label class="prediction-value">Moderate</label> 
+                </div>
+
+                <div class="form">
+                    <label for="whatIfSelect">What-If Scenarios:</label>
+                    <select id="whatIfSelect" class="styled-select">
+                        <option value="none">None</option>
+                        <option value="virus">New Virus Appearing</option>
+                        <option value="city_expansion">City Expansion</option>
+                        <option value="drought">Drought</option>
+                        <option value="pop_change">Sharp Increase/Decrease of Population</option>
+                        <option value="side_effects">Side Effects</option>
+                    </select>
+                </div>
+
+                <div class="form action-buttons">
+                    <button class="primary-Button" id="btnExplainGraph">Explain Graph</button>
+                    <button class="primary-Button" id="btnStabilize">How to Stabilize Ecosystem</button>
+                </div>
+            </div>
+
+            <div class="graph-column">
+                <label>Population Graphs:</label>
+                <img src="https://examplesweb.net/wp-content/uploads/linear-graph-examples-for-data-visualization.png" alt="Population Trend Graph" class="themed-graph">
+            </div>
+        </div>
+    </div>
+    <script src="./js/requestBackend.js"></script>
+</body>
+</html>
