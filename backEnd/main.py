@@ -32,7 +32,7 @@ ALLOWED_ORIGINS = ["http://127.0.0.1:5500", "http://localhost:5500", "https://ec
 app = Flask(__name__)
 
 # Whitelist sites specified
-CORS(app, resources={r"/ai-response": {"origins": ALLOWED_ORIGINS}})
+CORS(app)
 
 def requestGroq(location, animal, timeframe, whatIf):
     try:
