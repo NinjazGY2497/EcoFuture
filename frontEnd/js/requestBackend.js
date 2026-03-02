@@ -13,7 +13,7 @@ const whatIfSelecter = document.querySelector("#whatIfSelect");
 
 // Funcs
 async function requestBackend(location, animal, timeframe, whatIf) {
-    const BACKEND_URL = "http://hackathoncrewraag.pythonanywhere.com/ai-response";
+    const BACKEND_URL = "https://hackathoncrewraag.pythonanywhere.com/ai-response";
     const response = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
