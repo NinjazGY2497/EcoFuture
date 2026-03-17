@@ -51,7 +51,7 @@ def requestGroq(location, animal, timeframe, whatIf):
         userPrompt = (
             f"{whatIfPrompt}"
             f"Predict the population of {animal} in {location} over {timeframe}. "
-            f"Provide the historical/projected population data (detailed) for a graph (detailedd) with 'labels' (time) and 'values' (population count)."
+            f"Provide the historical/projected population data (detailed) for a graph (detailed) with 'labels' (time) and 'values' (population count)."
         )
         
         chatCompletion = client.chat.completions.create(
