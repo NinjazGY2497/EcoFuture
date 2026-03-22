@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/analysis.css">
     <title>Analysis - EcoFuture</title>
 </head>
 <body>
@@ -23,13 +24,21 @@
                 <div class="form">
                     <label for="whatIfSelect">What-If Scenarios:</label>
                     <select id="whatIfSelect" class="styled-select">
-                        <option value="none">None</option>
-                        <option value="newVirus">New Virus Appearing</option>
-                        <option value="cityExpansion">City Expansion</option>
-                        <option value="drought">Drought</option>
-                        <option value="suddenPopulationChange">Sharp Increase/Decrease of Population</option>
-                        <option value="sideEffects">Side Effects</option>
+                        <option value="None">None</option>
+                        <option value="New Virus">New Virus Appearing</option>
+                        <option value="City Expansion">City Expansion</option>
+                        <option value="Drought">Drought</option>
+                        <option value="Sudden Population Change">Sharp Increase/Decrease of Population</option>
+                        <option value="Side Effects">Side Effects</option>
+                        <option value="Invasive Species Entering">Invasive Species Entering</option>
+                        <option value="Other">Other</option>
                     </select>
+
+                    <div id="otherFieldContainer" style="display: none; margin-top: 10px;">
+                        <label id="otherInputLabel" for="otherInput">Other</label>
+                        <input type="text" name="otherInput" id="otherInput" placeholder="Type Here...">
+                        <button id="otherSubmitButton" type="submit">Submit</button>
+                    </div>
                 </div>
             </div>
 
@@ -52,7 +61,7 @@
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="./js/chart.js" type="module"></script> 
-            <script src="./js/requestBackend.js" type="module"></script>
+            <script src="./js/analysis.js" type="module"></script>
         </div>
     </div>
 </body>

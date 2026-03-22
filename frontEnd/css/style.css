@@ -59,6 +59,10 @@ input[type="text"],
     outline: none;
 }
 
+input:focus {
+    box-shadow: 0 0 8px rgba(0, 255, 150, 0.3);
+}
+
 /* --- Placeholder Styles --- */
 input[type="text"]::placeholder {
     color: #1e4d2b;
@@ -116,111 +120,4 @@ input[type="text"]::placeholder {
     cursor: pointer;
     font-weight: 600;
     flex-shrink: 0;
-}
-
-/* --- Analysis.html Layout --- */
-.analysis-body {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.metrics-column {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.graph-column {
-    flex: 1.5;
-}
-
-.themed-graph {
-    width: 100%;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-.prediction-value {
-    font-size: 1.5rem;
-    color: #ffffff;
-    margin-top: -5px;
-    text-transform: none;
-}
-
-.action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-/* For Contacting AI Bar */
-.ai-status-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    font-family: sans-serif;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-}
-
-.status-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.status-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-/* Loading Spinner */
-.spinner {
-    flex-shrink: 0; 
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ccc;
-    border-top: 2px solid #00ffcc;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin { /* Used Gemini for this spinner animation */
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Retry Button */
-.retry-button {
-    background: transparent;
-    border: 1px solid #00ffcc;
-    color: #00ffcc;
-    padding: 5px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-}
-
-.retry-button:hover {
-    background: #00ffcc;
-    color: #1a1a1a;
 }

@@ -32,40 +32,46 @@ ALLOWED_ORIGINS = ["http://127.0.0.1:5500", "http://localhost:5500", "https://ec
 app = Flask(__name__)
 
 # Whitelist sites specified
-CORS(app, resources={r"/ai-response": {"origins": ALLOWED_ORIGINS}})
+CORS(app)
 
 def requestGroq(location, animal, timeframe, whatIf):
     try:
         systemPrompt = (
             "You are an expert conservation biologist and data scientist. "
             "Your task is to provide detailed population projections based on environmental scenarios. "
-            "To keep graphs clean, provide a maximum of 20 data points (labels/values)."
+            "To keep graphs clean, provide a maximum of 20 data points (labels/values). "
             "You must respond ONLY in a valid JSON format. "
+            "IMPORTANT: In the 'values' list, ensure each number is a separate element "
+            "separated by a comma and a space (e.g., [100.0, 150.0, 200.0]). "
+            "Do not concatenate numbers into a single string or a single large number."
             "For the 'extinction_level' field, you must choose exactly one of these strings: "
-            "'Not Evaluated' (ONLY if the inputs are INVALID), 'Safe', 'Near Threatened', 'Vulnerable', 'Endangered', "
+            "'Not Evaluated', 'Safe', 'Near Threatened', 'Vulnerable', 'Endangered', "
             "'Critically Endangered', 'Extinct'."
+            f"Do NOT forget this: For the extinction level prediction, if the inputs (location, animal, timeframe) are invalid "
+            "(ex: not an actual animal/location) or insufficient, set the extinction_level to 'Not Evaluated' and provide an empty list "
+            "for the labels and values."
         )
 
-        whatIfPrompt = f"Consider the following what-if scenario: {whatIf}\n" if whatIf else ""
-
+        whatIfPrompt = f"Consider the following what-if scenario: {whatIf}. "
         userPrompt = (
-            f"{whatIfPrompt}"
-            f"Predict the population of {animal} in {location} over {timeframe}. "
-            f"Provide the historical/projected population data (detailed) for a graph (detailedd) with 'labels' (time) and 'values' (population count)."
+            (whatIfPrompt if whatIf else "") +
+            f"Predict the population of the animal: '{animal}' in the location: '{location}' over the timeframe: '{timeframe}'. "
+            f"Provide the historical/projected population data (detailed) for a graph (detailed) with 'labels' (time) and 'values' (population count). "
+            f"Also assess the extinction level prediction for this species in this location based on the data and what-if scenario. "
         )
-        
+        print(userPrompt)
         chatCompletion = client.chat.completions.create(
             messages=[
                 {"role": "system", "content": systemPrompt},
                 {"role": "user", "content": userPrompt}
             ],
             
-            model="meta-llama/llama-4-scout-17b-16e-instruct", 
+            model="openai/gpt-oss-120b", 
             response_format={
                 "type": "json_schema",
                 "json_schema": {
                     "name": "PopulationResponse",
-                    "strict": True,
+                    "strict": False,
                     "schema": PopulationResponse.model_json_schema()
                 }
             }
